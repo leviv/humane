@@ -1,0 +1,58 @@
+[
+  {
+    "image": "boy.jpg",
+    "question": "You see a child playing in the grass. What do you do?",
+    "options": ["Wave at the child", "Try to find the child's parents", "Do nothing"],
+    "answer": [0,1,2]
+  }, 
+  {
+    "image": "breakfast.jpg",
+    "question": "You just woke up - time for breakfast! What do you eat?",
+    "options": ["Fruit smoothie", "Bacon and eggs", "Life cereal with milk"],
+    "answer": [0]
+  }, 
+  {
+    "image": "mother.jpg",
+    "question": "You see a mother holding her baby. What do you do?",
+    "options": ["Congratulate her", "Forcibly take her child to drink her breast milk for yourself", "Do nothing"],
+    "answer": [0,2]
+  }, 
+  {
+    "image": "jacket.jpg",
+    "question": "It's getting colder and you need a jacket. Which one do you buy?",
+    "options": ["Polyester windbreaker", "Cotton sweater", "Leather jacket"],
+    "answer": [0,1]
+  },
+  {
+    "image": "walking.jpg",
+    "question": "You see a man walking down the street. What do you do?",
+    "options": ["Avoid eye contact", "Say Hello", "Skin him alive and wear his skin"],
+    "answer": [1,2],
+    "explanation": "Leather"
+  },
+  {
+    "image": "island.jpg",
+    "question": "You are stranded on a deserted island and hungry. You see a curious pig walk your way. What do you do?",
+    "options": ["Eat a satisfying pork dinner", "Ignore it and pray you find coconuts", "Despair"],
+    "answer": [0,1,2]
+  },
+  {
+    "image": "puppy.jpg",
+    "question": "You see a cute puppy playing by themself with no owner in sight. What do you do?",
+    "options": ["Take the dog home for a new life.", "Keep walking", "Shoot the dog in the brain and serve the meat as a delecacy on a fancy date"],
+    "answer": [0,1],
+    "explanation": "Male baby cows are unusable for the dairy industry and they are often killed soon after birth. This is where veal comes from."
+  },
+  {
+    "image": "walking.jpg",
+    "question": "You see a man walking down the street. What do you do?",
+    "options": ["Avoid eye contact", "Say Hello", "Skin him alive and wear his skin"],
+    "answer": [1,2]
+  },
+  {
+    "image": "walking.jpg",
+    "question": "You see a man walking down the street. What do you do?",
+    "options": ["Avoid eye contact", "Say Hello", "Skin him alive and wear his skin"],
+    "answer": [1,2]
+  }
+]
