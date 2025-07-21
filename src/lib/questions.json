@@ -1,40 +1,38 @@
 [
   {
     "image": "boy.jpg",
-    "question": "You see a child playing in the grass. What do you do?",
+    "question": "You see a child playing in the grass at the park. What do you do?",
     "options": ["Wave at the child", "Try to find the child's parents", "Do nothing"],
-    "answer": [0,1,2]
+    "answer": [0,1,2],
+    "explanation": "There's lots of people around, the child is safe!"
   }, 
   {
     "image": "breakfast.jpg",
     "question": "You just woke up - time for breakfast! What do you eat?",
     "options": ["Fruit smoothie", "Bacon and eggs", "Life cereal with milk"],
-    "answer": [0]
+    "answer": [0],
+    "explanation": "Hmmm, What does your decision at the breakfast table have to do with ethics?"
   }, 
   {
     "image": "mother.jpg",
     "question": "You see a mother holding her baby. What do you do?",
     "options": ["Congratulate her", "Forcibly take her child to drink her breast milk for yourself", "Do nothing"],
-    "answer": [0,2]
+    "answer": [0,2],
+    "explanation": "Woah what the fuck. Why is #2 even an option?"
   }, 
   {
     "image": "jacket.jpg",
     "question": "It's getting colder and you need a jacket. Which one do you buy?",
     "options": ["Polyester windbreaker", "Cotton sweater", "Leather jacket"],
-    "answer": [0,1]
+    "answer": [0,1],
+    "explanation": "This one's a no brainer right? Polyester is just plastic and leather is natural."
   },
   {
     "image": "walking.jpg",
     "question": "You see a man walking down the street. What do you do?",
     "options": ["Avoid eye contact", "Say Hello", "Skin him alive and wear his skin"],
-    "answer": [1,2],
-    "explanation": "Leather"
-  },
-  {
-    "image": "island.jpg",
-    "question": "You are stranded on a deserted island and hungry. You see a curious pig walk your way. What do you do?",
-    "options": ["Eat a satisfying pork dinner", "Ignore it and pray you find coconuts", "Despair"],
-    "answer": [0,1,2]
+    "answer": [0,1],
+    "explanation": "Conditions in leather shops are horrible both for the workers and the animals. The animals are often skinned alive and the workers are exposed to toxic chemicals without proper protection."
   },
   {
     "image": "puppy.jpg",
@@ -44,15 +42,24 @@
     "explanation": "Male baby cows are unusable for the dairy industry and they are often killed soon after birth. This is where veal comes from."
   },
   {
-    "image": "walking.jpg",
-    "question": "You see a man walking down the street. What do you do?",
-    "options": ["Avoid eye contact", "Say Hello", "Skin him alive and wear his skin"],
-    "answer": [1,2]
+    "image": "lunch.jpg",
+    "question": "Lunch time! Your out with friends and they suggest a restaurant. What do you order?",
+    "options": ["Tofu veggie stir fry", "Prime Rib steak", "Chicken Caesar salad"],
+    "answer": [0],
+    "explanation": "What you order for lunch is a personal choice! You shouldn't be forced to eat something you don't want right?"
   },
   {
-    "image": "walking.jpg",
-    "question": "You see a man walking down the street. What do you do?",
-    "options": ["Avoid eye contact", "Say Hello", "Skin him alive and wear his skin"],
-    "answer": [1,2]
+    "image": "cow.jpg",
+    "question": "You see cow in the pasture - so cute! What do you do?",
+    "options": ["Leave it alone", "Say Mooooooo", "Slit their throat and let them bleed out before removing their organs and extracting the meat."],
+    "answer": [0,1],
+    "explanation": "As a consumer of meat, you are complicit in the suffering of animals. You pay for someone else to work in a assembly line, killing panicked tortured animals day after day."
+  },
+    {
+    "image": "island.jpg",
+    "question": "You are stranded on a deserted island and hungry. You see a curious pig walk your way. What do you do?",
+    "options": ["Eat a satisfying pork dinner", "Ignore it and pray you find coconuts", "Despair"],
+    "answer": [0,1,2],
+    "explanation": "No one is saying there's no hypothetical situation where your survival is at stake. But for most day to day decisions, it's as simple as selecting another checkbox."
   }
 ]
