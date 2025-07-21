@@ -187,6 +187,7 @@
 <style>
 	:global(body) {
 		padding: 0;
+		margin: 5px;
 		font-family: 'Overpass', sans-serif;
 	}
 
@@ -202,7 +203,6 @@
 		border: 1px solid black;
 		padding: 10px;
 		max-width: 700px;
-		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -214,14 +214,14 @@
 		border: 1px solid black;
 		margin-top: 10px;
 		max-width: 700px;
-		width: 100%;
+		width: calc(100% - 20px);
 		padding: 10px;
 		background-color: rgba(255, 255, 255, 0.7);
 	}
 
 	.buttons {
 		max-width: 700px;
-		width: 100%;
+		width: calc(100% - 20px);
 		padding: 10px;
 		border: 1px solid black;
 		margin-top: 10px;
@@ -231,7 +231,7 @@
 
 	.explanation {
 		max-width: 700px;
-		width: 100%;
+		width: calc(100% - 20px);
 		padding: 3px 10px;
 		border: 1px solid black;
 		margin-top: 10px;
