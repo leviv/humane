@@ -165,17 +165,13 @@
 
 <!-- Change the icon and the tab title based on the agitation level. -->
 <svelte:head>
-	{#if agitation > 1.4}
-		<link
-			rel="icon"
-			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>😈</text></svg>"
-		/>
-	{:else}
-		<link
-			rel="icon"
-			href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>😇</text></svg>"
-		/>
-	{/if}
+	<link
+		rel="icon"
+		href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>{agitation >
+		1.4
+			? '😈'
+			: '😇'}</text></svg>"
+	/>
 	<title>
 		{agitation > 1.4 ? 'In' : ''}Humane
 	</title>
