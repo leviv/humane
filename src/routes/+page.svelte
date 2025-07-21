@@ -7,6 +7,7 @@
 	let selectedOption = '';
 	let answerCorrect: boolean | undefined = undefined;
 
+	// This will run when selectedOption changes
 	$: if (selectedOption) {
 		const selectedOptionIndex = data[currentQuestionIndex].options.indexOf(selectedOption);
 		if (selectedOptionIndex >= 0) {
@@ -24,12 +25,14 @@
 		}
 	}
 
+	// Handler when we click next question
 	const onNextQuestion = () => {
 		currentQuestionIndex = (currentQuestionIndex + 1) % data.length;
 		selectedOption = '';
 		answerCorrect = undefined;
 	};
 
+	// Handler when we click previous question
 	const onPreviousQuestion = () => {
 		currentQuestionIndex = (currentQuestionIndex - 1 + data.length) % data.length;
 		selectedOption = '';
@@ -46,6 +49,7 @@
 		p5.setup = () => {
 			p5.createCanvas(IMAGE_WIDTH + CANVAS_PADDING, IMAGE_HEIGHT + CANVAS_PADDING);
 			const canvasEl = p5.canvas;
+			// I think this is a svelte optiomization ? Not sure if it works
 			const ctx = canvasEl.getContext('2d', { willReadFrequently: true });
 			p5.drawingContext = ctx;
 			capture = p5.createCapture(p5.VIDEO);
@@ -62,6 +66,7 @@
 
 			for (let col = 0; col < IMAGE_WIDTH; col += 10) {
 				for (let row = 0; row < IMAGE_HEIGHT; row += 10) {
+					// Pixel data is stored in a flat array, so we calculate the index
 					const i = 4 * (row * IMAGE_WIDTH + col);
 					const r = capture.pixels[i] * agitation;
 					const g = capture.pixels[i + 1];
@@ -70,22 +75,24 @@
 
 					p5.fill(r, g, b, a);
 					p5.noStroke();
-
-					// Draw fewer blobs if performance is still a concern
-					if ((col + row) % 20 === 0) {
-						drawBlob(col, row, 20);
-					}
+					drawBlob(col, row, 20);
 				}
 			}
 		};
 
+		// Save the canvas as an image when 's' is pressed
 		p5.keyPressed = () => {
-			console.log('Key pressed:', p5.key);
 			if (p5.key == 's') {
 				p5.save('humane.png');
 			}
 		};
 
+		/**
+		 * Function to draw a blob at a given center position. It animates and wiggles around
+		 * @param centerX
+		 * @param centerY
+		 * @param maxHeight
+		 */
 		function drawBlob(centerX: number, centerY: number, maxHeight: number) {
 			p5.push();
 			p5.noStroke();
@@ -103,6 +110,7 @@
 				const ny = p5.map(p5.cos(angle), -1, 1, 0, 2);
 				const nz = baseZ;
 
+				// Use Perlin noise to create a smooth, organic shape
 				const noiseVal = p5.noise(nz, ny, nx);
 				let radius = p5.map(noiseVal, 0, 1, maxHeight / 20, maxHeight);
 				if (i % 2 === 1) {
@@ -120,6 +128,7 @@
 	};
 </script>
 
+<!-- Change the icon and the tab title based on the agitation level. -->
 <svelte:head>
 	{#if agitation > 1.4}
 		<link
