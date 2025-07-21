@@ -1,6 +1,7 @@
 <script lang="ts">
 	import P5 from 'p5-svelte';
 	import data from '$lib/questions.json';
+	import { draw } from 'svelte/transition';
 
 	let agitation = 1;
 	let currentQuestionIndex = 0;
@@ -58,25 +59,59 @@
 			p5.frameRate(60);
 		};
 
+		/**
+		 * Shuffles an array using a seeded random function.
+		 * @param array
+		 */
+		function shuffle(array: any[]) {
+			const seed = function (s: number) {
+				s = Math.sin(s) * 10000;
+				return s - Math.floor(s);
+			};
+
+			let currentIndex = array.length;
+
+			// While there remain elements to shuffle...
+			while (currentIndex != 0) {
+				// Pick a remaining element...
+				let randomIndex = Math.floor(seed(50000) * currentIndex);
+				currentIndex--;
+
+				// And swap it with the current element.
+				[array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+			}
+
+			return array;
+		}
+
 		p5.draw = () => {
 			p5.background(255);
-			p5.translate(p5.width / 2 - IMAGE_WIDTH / 2, p5.height / 2 - IMAGE_HEIGHT / 2);
-
+			p5.translate(p5.width / 2 - IMAGE_WIDTH / 2 + 2, p5.height / 2 - IMAGE_HEIGHT / 2 + 2);
 			capture.loadPixels();
+			p5.noStroke();
+			let pixels: { col: number; row: number; color: any }[] = [];
 
-			for (let col = 0; col < IMAGE_WIDTH; col += 10) {
-				for (let row = 0; row < IMAGE_HEIGHT; row += 10) {
+			for (let col = 0; col < IMAGE_WIDTH; col += 14) {
+				for (let row = 0; row < IMAGE_HEIGHT; row += 14) {
 					// Pixel data is stored in a flat array, so we calculate the index
 					const i = 4 * (row * IMAGE_WIDTH + col);
 					const r = capture.pixels[i] * agitation;
 					const g = capture.pixels[i + 1];
 					const b = capture.pixels[i + 2];
 					const a = capture.pixels[i + 3];
+					const pixelColor = p5.color(r, g, b, a);
 
-					p5.fill(r, g, b, a);
-					p5.noStroke();
-					drawBlob(col, row, 20);
+					pixels.push({ col, row, color: pixelColor });
 				}
+			}
+
+			const shuffledPixels = shuffle(pixels);
+
+			for (let i = 0; i < shuffledPixels.length; i++) {
+				const { col, row, color } = shuffledPixels[i];
+				console.log(`Drawing pixel at (${col}, ${row}) with color ${color}`);
+				p5.fill(color);
+				drawBlob(col, row, 28);
 			}
 		};
 
@@ -146,46 +181,55 @@
 	</title>
 </svelte:head>
 
-<div class="main-body">
-	<div class="canvas">
-		<p>You:</p>
-		<P5 {sketch} />
-		<p>Press <span class="save">s</span> to save the canvas</p>
+<div class="content">
+	<div class="title">
+		<h1><span class="in" style="opacity: {agitation - 1 + 0.05};">In</span>Humane</h1>
 	</div>
 
-	<div class="quiz-content">
-		<div class="title">
-			<h1><span class="in" style="opacity: {agitation - 1 + 0.05};">In</span>Humane</h1>
+	<div class="main-body">
+		<div class="canvas">
+			<p>You:</p>
+			<P5 {sketch} />
+			<p>Press <span class="save">s</span> to save the canvas</p>
 		</div>
 
-		<div class="question-intro">
-			<h3>{data[currentQuestionIndex].question}</h3>
-			<img src={data[currentQuestionIndex].image} alt={data[currentQuestionIndex].question} />
-		</div>
-
-		<div class="options">
-			{#each data[currentQuestionIndex].options as option}
-				<input type="radio" id={option} name="option" value={option} bind:group={selectedOption} />
-				<label for={option}>{option}</label><br />
-			{/each}
-		</div>
-
-		<div class="buttons">
-			<button
-				on:click={onPreviousQuestion}
-				class="{currentQuestionIndex === 0 ? 'hidden' : ''} previous">&larr; Previous</button
-			>
-			<button
-				on:click={onNextQuestion}
-				class="{currentQuestionIndex === data.length - 1 ? 'hidden' : ''} next">Next &rarr;</button
-			>
-		</div>
-
-		{#if selectedOption !== '' && data[currentQuestionIndex].explanation}
-			<div class="explanation">
-				<p>💡: {data[currentQuestionIndex].explanation}</p>
+		<div class="quiz-content">
+			<div class="question-intro">
+				<h3>{data[currentQuestionIndex].question}</h3>
+				<img src={data[currentQuestionIndex].image} alt={data[currentQuestionIndex].question} />
 			</div>
-		{/if}
+
+			<div class="options">
+				{#each data[currentQuestionIndex].options as option}
+					<input
+						type="radio"
+						id={option}
+						name="option"
+						value={option}
+						bind:group={selectedOption}
+					/>
+					<label for={option}>{option}</label><br />
+				{/each}
+			</div>
+
+			<div class="buttons">
+				<button
+					on:click={onPreviousQuestion}
+					class="{currentQuestionIndex === 0 ? 'hidden' : ''} previous">&larr; Previous</button
+				>
+				<button
+					on:click={onNextQuestion}
+					class="{currentQuestionIndex === data.length - 1 ? 'hidden' : ''} next"
+					>Next &rarr;</button
+				>
+			</div>
+
+			{#if selectedOption !== '' && data[currentQuestionIndex].explanation}
+				<div class="explanation">
+					<p>💡: {data[currentQuestionIndex].explanation}</p>
+				</div>
+			{/if}
+		</div>
 	</div>
 </div>
 
@@ -259,6 +303,10 @@
 		text-align: left;
 		font-family: 'Sansita', sans-serif;
 		text-transform: uppercase;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		margin-right: 25px;
 
 		span {
 			color: #ff6347;
@@ -266,7 +314,6 @@
 	}
 
 	.canvas {
-		margin-top: 82px;
 		height: fit-content;
 		z-index: -1;
 		border: 1px solid black;
