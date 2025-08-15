@@ -37,7 +37,7 @@
   {
     "image": "puppy.jpg",
     "question": "You see a cute puppy playing by themself with no owner in sight. What do you do?",
-    "options": ["Take the dog home for a new life.", "Keep walking", "Shoot the dog in the brain and serve the meat as a delecacy on a fancy date"],
+    "options": ["Take the dog home for a new life.", "Keep walking", "Shoot the dog in the brain and serve the meat as a delicacy on a fancy date"],
     "answer": [0,1],
     "explanation": "Male baby cows are unusable for the dairy industry and they are often killed soon after birth. This is where veal comes from."
   },
